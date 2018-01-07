@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>个人全栈之路</title>
+  <title>Java静态代理 | 个人全栈之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -51,26 +51,26 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   <div class="article-meta">
     
       <header class="article-header">
         
   
-    <a class="article-title" href="/2018/01/07/hello-world/">Hello World</a>
+    <a class="article-title" href="/backend/jdk/jdk-cglib-proxy.html">Java静态代理</a>
   
 
       </header>
     
-    <time class="article-date" datetime="2018-01-07T12:04:28.781Z" itemprop="datePublished">01-07-2018</time>
     
   </div>
-  <div class="article-inner">
+  <div class="article-page-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+        <p>修订说明：本书内容已基于 Docker CE v17.MM 进行了重新修订，2017 年底发布了 0.9.0 版本。旧版本（Docker 1.13-）内容，请阅读 docker-legacy 分支的内容。</p>
+<p>Docker 是个划时代的开源项目，它彻底释放了计算虚拟化的威力，极大提高了应用的运行效率，降低了云计算资源供应的成本！使用 Docker，可以让应用的部署、测试和分发都变得前所未有的高效和轻松！</p>
+<p>无论是应用开发者、运维人员、还是其他信息技术从业人员，都有必要认识和掌握 Docker，节约有限的时间。</p>
+<p>本书既适用于具备基础 Linux 知识的 Docker 初学者，也希望可供理解原理和实现的高级用户参考。同时，书中给出的实践案例，可供在进行实际部署时借鉴。前六章为基础内容，供用户理解 Docker 的基本概念和操作；<br>7 ~ 9 章介绍包括数据管理、网络等高级操作；第 10 ~ 13 章介绍了容器生态中的几个核心项目；14、15 章讨论了关于 Docker 安全和实现技术等高级话题。后续章节则分别介绍包括 Etcd、CoreOS、Kubernetes、<br>Mesos、容器云等热门开源项目。最后，展示了使用容器技术的典型的应用场景和实践案例。</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -82,19 +82,9 @@
 
       
     </div>
-    <footer class="article-footer">
-      <!--<a data-url="http://yoursite.com/2018/01/07/hello-world/" data-id="cjc4vuvhl0001c4q2cyvejoer" class="article-share-link">Share</a>-->
-      
-      
-    </footer>
   </div>
   
-</article>
-
-
-  
-  
-</section>
+</article></section>
         
       </div>
       <footer id="footer">
