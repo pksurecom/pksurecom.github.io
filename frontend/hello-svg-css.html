@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SVG 和 CSS | 个人全栈之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  <!--<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">-->
+  <link rel="stylesheet" href="/css/style.css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <!--<h1 id="logo-wrap">-->
+        <!--<a href="/" id="logo">个人全栈之路</a>-->
+      <!--</h1>-->
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/">首页</a>
+        
+          <a id="nav-design-icon" class="nav-icon" href="/design">设计</a>
+        
+          <a id="nav-frontend-icon" class="nav-icon" href="/frontend">前端</a>
+        
+          <a id="nav-android-icon" class="nav-icon" href="/android">Android</a>
+        
+          <a id="nav-ios-icon" class="nav-icon" href="/ios">iOS</a>
+        
+          <a id="nav-backend-icon" class="nav-icon" href="/backend">后端</a>
+        
+          <a id="nav-devops-icon" class="nav-icon" href="/devops">DevOps</a>
+        
+          <a id="nav-read-icon" class="nav-icon" href="/read">读书</a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives">归档</a>
+        
+          <a id="nav-about-icon" class="nav-icon" href="/about">关于</a>
+        
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/frontend/hello-svg-css.html">SVG 和 CSS</a>
+  
+
+      </header>
+    
+    
+  </div>
+  <div class="article-page-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-svg-file-eg-demo-svg"><a href="#Create-a-svg-file-eg-demo-svg" class="headerlink" title="Create a svg file: eg. demo.svg"></a>Create a svg file: eg. demo.svg</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> standalone=<span class="string">"no"</span>?&gt;</div><div class="line">&lt;?xml-stylesheet <span class="built_in">type</span>=<span class="string">"text/css"</span> href=<span class="string">"style8.css"</span>?&gt;</div><div class="line">&lt;!DOCTYPE svg PUBLIC <span class="string">"-//W3C//DTD SVG 1.1//EN"</span></div><div class="line">  <span class="string">"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"</span>&gt;</div><div class="line"></div><div class="line">&lt;svg width=<span class="string">"600px"</span> height=<span class="string">"600px"</span> viewBox=<span class="string">"-300 -300 600 600"</span></div><div class="line">  xmlns=<span class="string">"http://www.w3.org/2000/svg"</span> version=<span class="string">"1.1"</span></div><div class="line">  xmlns:xlink=<span class="string">"http://www.w3.org/1999/xlink"</span>&gt;</div><div class="line"></div><div class="line">  &lt;title&gt;SVG demonstration&lt;/title&gt;</div><div class="line">  &lt;desc&gt;Mozilla CSS Getting Started - SVG demonstration&lt;/desc&gt;</div><div class="line"></div><div class="line">  &lt;defs&gt;</div><div class="line">    &lt;g id=<span class="string">"segment"</span> class=<span class="string">"segment"</span>&gt;</div><div class="line">      &lt;path class=<span class="string">"segment-fill"</span> d=<span class="string">"M0,0 v-200 a40,40 0 0,0 -62,10 z"</span>/&gt;</div><div class="line">      &lt;path class=<span class="string">"segment-edge"</span> d=<span class="string">"M0,-200 a40,40 0 0,0 -62,10"</span>/&gt;</div><div class="line">      &lt;/g&gt;</div><div class="line">    &lt;g id=<span class="string">"quadrant"</span>&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#segment"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#segment"</span> transform=<span class="string">"rotate(18)"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#segment"</span> transform=<span class="string">"rotate(36)"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#segment"</span> transform=<span class="string">"rotate(54)"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#segment"</span> transform=<span class="string">"rotate(72)"</span>/&gt;</div><div class="line">      &lt;/g&gt;</div><div class="line">    &lt;g id=<span class="string">"petals"</span>&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#quadrant"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#quadrant"</span> transform=<span class="string">"rotate(90)"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#quadrant"</span> transform=<span class="string">"rotate(180)"</span>/&gt;</div><div class="line">      &lt;use xlink:href=<span class="string">"#quadrant"</span> transform=<span class="string">"rotate(270)"</span>/&gt;</div><div class="line">      &lt;/g&gt;</div><div class="line">    &lt;radialGradient id=<span class="string">"fade"</span> cx=<span class="string">"0"</span> cy=<span class="string">"0"</span> r=<span class="string">"200"</span></div><div class="line">        gradientUnits=<span class="string">"userSpaceOnUse"</span>&gt;</div><div class="line">      &lt;stop id=<span class="string">"fade-stop-1"</span> offset=<span class="string">"33%"</span>/&gt;</div><div class="line">      &lt;stop id=<span class="string">"fade-stop-2"</span> offset=<span class="string">"95%"</span>/&gt;</div><div class="line">      &lt;/radialGradient&gt;</div><div class="line">  &lt;/defs&gt;</div><div class="line"></div><div class="line">  &lt;text id=<span class="string">"heading"</span> x=<span class="string">"-280"</span> y=<span class="string">"-270"</span>&gt;</div><div class="line">    SVG demonstration&lt;/text&gt;</div><div class="line">  &lt;text  id=<span class="string">"caption"</span> x=<span class="string">"-280"</span> y=<span class="string">"-250"</span>&gt;</div><div class="line">    Move your mouse pointer over the flower.&lt;/text&gt;</div><div class="line"></div><div class="line">  &lt;g id=<span class="string">"flower"</span>&gt;</div><div class="line">    &lt;circle id=<span class="string">"overlay"</span> cx=<span class="string">"0"</span> cy=<span class="string">"0"</span> r=<span class="string">"200"</span></div><div class="line">      stroke=<span class="string">"none"</span> fill=<span class="string">"url(#fade)"</span>/&gt;</div><div class="line">    &lt;use id=<span class="string">"outer-petals"</span> xlink:href=<span class="string">"#petals"</span>/&gt;</div><div class="line">    &lt;use id=<span class="string">"inner-petals"</span> xlink:href=<span class="string">"#petals"</span></div><div class="line">      transform=<span class="string">"rotate(9) scale(0.33)"</span>/&gt;</div><div class="line">  &lt;/g&gt;</div><div class="line"></div><div class="line">&lt;/svg&gt;</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+  </div>
+  
+</article></section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 pksurecom@163.com<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
