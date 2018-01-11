@@ -81,11 +81,12 @@
 <h2 id="什么场景下使用原子操作？-Where-When"><a href="#什么场景下使用原子操作？-Where-When" class="headerlink" title="什么场景下使用原子操作？(Where-When)"></a>什么场景下使用原子操作？(Where-When)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. ；</div><div class="line">2. ；</div><div class="line">3. ；</div></pre></td></tr></table></figure>
 <h2 id="Java内部是怎么实现原子操作呢？-How"><a href="#Java内部是怎么实现原子操作呢？-How" class="headerlink" title="Java内部是怎么实现原子操作呢？(How)"></a>Java内部是怎么实现原子操作呢？(How)</h2><p>Java的原子操作类都存放在java.util.concurrent.atomic包下（JDK1.8.0_91一共17个类），主要分为4大类：</p>
 <ul>
-<li>原子更新基本数据类型；</li>
-<li>原子更新数组；</li>
-<li>原子更新引用；</li>
-<li>原子更新字段。<br>其实现基本上都是对Unsafe类的包装使用。</li>
+<li>①-原子更新基本数据类型；</li>
+<li>②-原子更新数组；</li>
+<li>③-原子更新引用；</li>
+<li>④-原子更新字段。</li>
 </ul>
+<p>其实现基本上都是对Unsafe类的包装使用。</p>
 <p>包结构图：<br><img src="../../image/jdk/atomic-package.jpg" alt=""></p>
 <h4 id="①：原子更新基本数据类型："><a href="#①：原子更新基本数据类型：" class="headerlink" title="①：原子更新基本数据类型："></a>①：原子更新基本数据类型：</h4><p>在atomic包中，原子更新基本数据类型主要有3个类，分别是：AtomicBoolean、AtomicInteger、AtomicLong，下面介绍它们的主要方法：</p>
 <ul>
@@ -99,12 +100,10 @@
 <li>AtomicBoolean类</li>
 </ul>
 <h4 id="②：原子更新数组："><a href="#②：原子更新数组：" class="headerlink" title="②：原子更新数组："></a>②：原子更新数组：</h4><h4 id="③：原子更新引用："><a href="#③：原子更新引用：" class="headerlink" title="③：原子更新引用："></a>③：原子更新引用：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<h4 id="④：原子更新字段："><a href="#④：原子更新字段：" class="headerlink" title="④：原子更新字段："></a>④：原子更新字段：</h4><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="缓存行"><a href="#缓存行" class="headerlink" title="缓存行"></a><span id="cache-line">缓存行</span></h4><p>现代的处理器一般都有3级缓存结构，L1、L2和L3，CPU直接访问主存是一个相对比较慢的操作，所以通过3级缓存来提升访存性能。<br>如果将3个缓存当成一个整体来看待，它就是CPU缓存。缓存的制造成本非常昂贵，它一般要比主存空间小的多。</p>
-<p>CPU缓存：<br><img src="../../image/jdk/cpu-cache.png" alt=""></p>
+<h4 id="④：原子更新字段："><a href="#④：原子更新字段：" class="headerlink" title="④：原子更新字段："></a>④：原子更新字段：</h4><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="缓存行"><a href="#缓存行" class="headerlink" title="缓存行"></a><span id="cache-line">缓存行</span></h4><p>现代的处理器一般都有3级缓存结构，L1、L2和L3，CPU直接访问主存是一个相对比较慢的操作，所以通过3级缓存来提升访存性能。<br>如果将3个缓存当成一个整体来看待，它就是CPU缓存。缓存的制造成本非常昂贵，它一般要比主存空间小的多。<br><img src="../../image/jdk/cpu-cache.png" alt="CPU缓存"></p>
 <p>CPU在读主存的时候，会先将主存的一块数据加载到缓存上，然后在缓存上读取。当CPU写主存的时候，它会首先写缓存，在未来的<br>某个时间点再一次性将缓存的数据全部刷回主存，这样就可以提高写操作的性能。因为计算机程序数据操作的局部性，CPU连续的指令<br>倾向于访问相邻地址空间的数据，所以后续的读写操作有很大的概率可以直接在缓存上拿到数据。如果缓存上不存在，那就再去主存上加载进来。</p>
 <p>缓存虽然小，但是也不是太小，CPU在加载主存数据时，如果一次性将整个Cache填满，但是接下来的指令访问的数据又不在缓存上，<br>就会导致读浪费。另外如果只修改了其中几个字节的数据，但是得回写整个Cache到内存，这又会导致写浪费。</p>
-<p>所以现代的CPU缓存一般是分行存储的，最小处理单位是一个行，这个行的长度一般来说就是64字节，我们称之为【缓存行】</p>
-<p>缓存行：<br><img src="../../image/jdk/cpu-cache-line.png" alt=""></p>
+<p>所以现代的CPU缓存一般是分行存储的，最小处理单位是一个行，这个行的长度一般来说就是64字节，我们称之为【缓存行】<br><img src="../../image/jdk/cpu-cache-line.png" alt="缓存行"></p>
 <p><strong>注意</strong>：Java教科书里面为了便于新手理解，不会提及缓存，一般只会说volatile变量直接读写内存。</p>
 <h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2>
       
