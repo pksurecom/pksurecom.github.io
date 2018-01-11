@@ -335,7 +335,7 @@ body {
   -ms-transition: opacity 0.2s;
   transition: opacity 0.2s;
   display: block;
-  padding: 20px 15px;
+  padding: 20px 12px;
 }
 .nav-icon:hover,
 .main-nav-link:hover {
@@ -345,9 +345,8 @@ body {
   font-family: FontAwesome;
   text-align: center;
   font-size: 14px;
-  width: 40px;
   height: 14px;
-  padding: 20px 15px;
+  padding: 20px 12px;
   position: relative;
   cursor: pointer;
 }
