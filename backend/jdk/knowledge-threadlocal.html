@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ThreadLocal | 个人全栈之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  <!--<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">-->
+  <link rel="stylesheet" href="/css/style.css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <!--<h1 id="logo-wrap">-->
+        <!--<a href="/" id="logo">个人全栈之路</a>-->
+      <!--</h1>-->
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/">首页</a>
+        
+          <a id="nav-design-icon" class="nav-icon" href="/design">设计</a>
+        
+          <a id="nav-frontend-icon" class="nav-icon" href="/frontend">前端</a>
+        
+          <a id="nav-android-icon" class="nav-icon" href="/android">Android</a>
+        
+          <a id="nav-ios-icon" class="nav-icon" href="/ios">iOS</a>
+        
+          <a id="nav-backend-icon" class="nav-icon" href="/backend">JEE</a>
+        
+          <a id="nav-database-icon" class="nav-icon" href="/database">数据库</a>
+        
+          <a id="nav-test-icon" class="nav-icon" href="/test">测试</a>
+        
+          <a id="nav-devops-icon" class="nav-icon" href="/devops">DevOps</a>
+        
+          <a id="nav-tool-icon" class="nav-icon" href="/tool">工具</a>
+        
+          <a id="nav-read-icon" class="nav-icon" href="/read">读书</a>
+        
+          <a id="nav-about-icon" class="nav-icon" href="/about">关于</a>
+        
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/backend/jdk/knowledge-threadlocal.html">ThreadLocal</a>
+  
+
+      </header>
+    
+    
+  </div>
+  <div class="article-page-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是ThreadLocal？-What"><a href="#什么是ThreadLocal？-What" class="headerlink" title="什么是ThreadLocal？(What)"></a>什么是ThreadLocal？(What)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h2 id="为什么要使用ThreadLocal？-Why"><a href="#为什么要使用ThreadLocal？-Why" class="headerlink" title="为什么要使用ThreadLocal？(Why)"></a>为什么要使用ThreadLocal？(Why)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. 降低系统资源消耗；</div><div class="line">2. 提高响应速度；</div><div class="line">3. 方便集中管理线程；</div></pre></td></tr></table></figure>
+<h2 id="什么场景下使用ThreadLocal？-Where-When"><a href="#什么场景下使用ThreadLocal？-Where-When" class="headerlink" title="什么场景下使用ThreadLocal？(Where-When)"></a>什么场景下使用ThreadLocal？(Where-When)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. SpringMVC线程安全问题；</div><div class="line">2. 性能问题：不想加重锁(synchronized)而想线程安全；</div><div class="line">3. ；</div></pre></td></tr></table></figure>
+<h2 id="Java内部怎么实现ThreadLocal？-How"><a href="#Java内部怎么实现ThreadLocal？-How" class="headerlink" title="Java内部怎么实现ThreadLocal？(How)"></a>Java内部怎么实现ThreadLocal？(How)</h2><h4 id="①：Java内部线程池类结构图："><a href="#①：Java内部线程池类结构图：" class="headerlink" title="①：Java内部线程池类结构图："></a>①：Java内部线程池类结构图：</h4><p><img src="../../image/jdk/source-code-threadpool-class-diagram.png" alt=""></p>
+<h4 id="②：创建一个线程池："><a href="#②：创建一个线程池：" class="headerlink" title="②：创建一个线程池："></a>②：创建一个线程池：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="③：ThreadPoolExecutor构造函数："><a href="#③：ThreadPoolExecutor构造函数：" class="headerlink" title="③：ThreadPoolExecutor构造函数："></a>③：ThreadPoolExecutor构造函数：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h4 id="③-①：ThreadFactory类"><a href="#③-①：ThreadFactory类" class="headerlink" title="③-①：ThreadFactory类"></a>③-①：ThreadFactory类</h4><h4 id="③-②：RejectedExecutionHandler类"><a href="#③-②：RejectedExecutionHandler类" class="headerlink" title="③-②：RejectedExecutionHandler类"></a>③-②：RejectedExecutionHandler类</h4><h4 id="④：execute方式执行任务"><a href="#④：execute方式执行任务" class="headerlink" title="④：execute方式执行任务"></a>④：execute方式执行任务</h4><blockquote>
+<ol>
+<li>execute()方法：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>前戏：<br>ThreadPoolExecutor中有一个 AtomicInteger 类型的 ctl 字段，其作用有二：</p>
+<ul>
+<li>当前活跃的线程数；</li>
+<li>线程的运行状态。</li>
+</ul>
+<p>以下代码是从JDK源码中拷贝出来单独执行的单元测试。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<h4 id="④-①：ThreadFactory类"><a href="#④-①：ThreadFactory类" class="headerlink" title="④-①：ThreadFactory类"></a>④-①：ThreadFactory类</h4><h4 id="⑤：submit方式执行任务"><a href="#⑤：submit方式执行任务" class="headerlink" title="⑤：submit方式执行任务"></a>⑤：submit方式执行任务</h4>
+      
+    </div>
+  </div>
+  
+</article></section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 pksurecom@163.com<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

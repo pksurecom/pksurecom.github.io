@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java动态代理 | 个人全栈之路</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  <!--<link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">-->
+  <link rel="stylesheet" href="/css/style.css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <!--<h1 id="logo-wrap">-->
+        <!--<a href="/" id="logo">个人全栈之路</a>-->
+      <!--</h1>-->
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/">首页</a>
+        
+          <a id="nav-design-icon" class="nav-icon" href="/design">设计</a>
+        
+          <a id="nav-frontend-icon" class="nav-icon" href="/frontend">前端</a>
+        
+          <a id="nav-android-icon" class="nav-icon" href="/android">Android</a>
+        
+          <a id="nav-ios-icon" class="nav-icon" href="/ios">iOS</a>
+        
+          <a id="nav-backend-icon" class="nav-icon" href="/backend">JEE</a>
+        
+          <a id="nav-database-icon" class="nav-icon" href="/database">数据库</a>
+        
+          <a id="nav-test-icon" class="nav-icon" href="/test">测试</a>
+        
+          <a id="nav-devops-icon" class="nav-icon" href="/devops">DevOps</a>
+        
+          <a id="nav-tool-icon" class="nav-icon" href="/tool">工具</a>
+        
+          <a id="nav-read-icon" class="nav-icon" href="/read">读书</a>
+        
+          <a id="nav-about-icon" class="nav-icon" href="/about">关于</a>
+        
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/backend/jdk/design-pattern-cglib-proxy.html">Java动态代理</a>
+  
+
+      </header>
+    
+    
+  </div>
+  <div class="article-page-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在阅读一些框架源码的时候，不可避免的会遇到代理模式，比如Spring AOP，其底层实现就是使用代理模式，有JDK的动态代理和CGLib代理实现，<br>今天讨论的是JDK动态代理，既然叫动态代理，是否有静态代理呢？答案是肯定的，那就先来了解一下静态代理是什么样的吧。</p>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><p>在初学JDBC的时候，经典的四段式代码：加载驱动、获取连接、SQL操作、关闭连接，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// ①：加载数据库驱动</div><div class="line">Class.forName(className);</div><div class="line"></div><div class="line">// ②：获取数据库连接</div><div class="line">Connection connection = DriverManager.getConnection(url, username, password);</div><div class="line"></div><div class="line">// ③：执行插入操作</div><div class="line">PreparedStatement preparedStatement = connection.prepareStatement(sql);</div><div class="line">preparedStatement.execute();</div><div class="line"></div><div class="line">// ④：关闭连接资源</div><div class="line">preparedStatement.close();</div><div class="line">connection.close();</div></pre></td></tr></table></figure></p>
+<p>比如，我们在业务开发中，需要添加用户时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class UserServiceImpl &#123;</div><div class="line"></div><div class="line">    public static final String url = <span class="string">"jdbc:mysql://127.0.0.1/jdbc-demo"</span>;</div><div class="line">    public static final String className = <span class="string">"com.mysql.jdbc.Driver"</span>;</div><div class="line">    public static final String username = <span class="string">"root"</span>;</div><div class="line">    public static final String password = <span class="string">""</span>;</div><div class="line"></div><div class="line">    public void save(User user) throws Exception &#123;</div><div class="line">        String sql = <span class="string">"insert user(name, sex, age) value ('"</span> + user.getName() + <span class="string">"', '"</span> + user.getSex() + <span class="string">"', "</span> + user.getAge() + <span class="string">")"</span>;</div><div class="line"></div><div class="line">        // ①：加载数据库驱动</div><div class="line">        Class.forName(className);</div><div class="line"></div><div class="line">        // ②：获取数据库连接</div><div class="line">        Connection connection = DriverManager.getConnection(url, username, password);</div><div class="line"></div><div class="line">        // ③：执行插入操作</div><div class="line">        PreparedStatement preparedStatement = connection.prepareStatement(sql);</div><div class="line">        preparedStatement.execute();</div><div class="line"></div><div class="line">        // ④：关闭连接资源</div><div class="line">        preparedStatement.close();</div><div class="line">        connection.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>或许我们应该将数据库的加载、打开、关闭提取出一个工具类会比较合适，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class UserServiceImpl implements UserService &#123;</div><div class="line"></div><div class="line">    private DBHelper dbHelper;</div><div class="line"></div><div class="line">    public void save(User user) throws Exception &#123;</div><div class="line">        String sql = <span class="string">"insert user(name, sex, age) value ('"</span> + user.getName() + <span class="string">"', '"</span> + user.getSex() + <span class="string">"', "</span> + user.getAge() + <span class="string">")"</span>;</div><div class="line">        dbHelper = new DBHelper(sql);</div><div class="line">        dbHelper.preparedStatement.execute();</div><div class="line">        dbHelper.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码看起来稍微简洁了些，但是如果我们再有【查询】、【删除】、【更改】用户等操作时，我们的业务代码里充斥着大量<br>的非业务相关的重复代码（数据库加载、连接、关闭），业务代码无可读性以及公共代码没得到复用，我们其实想要的是业务<br>模块中就只是触发用户【保存】、【删除】、【修改】、【查询】的动作，其他的数据库操作交由别人来完成，此时，我们<br>的静态代理出场了…</p>
+<p>添加一个UserServiceImplProxy代理类：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class UserServiceImplProxy implements UserService &#123;</div><div class="line"></div><div class="line">    private UserService userService;</div><div class="line">    private DBHelper dbHelper;</div><div class="line"></div><div class="line">    public UserServiceImplProxy(UserService userService) &#123;</div><div class="line">        this.userService = userService;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void save(User user) throws Exception &#123;</div><div class="line">        userService.save(user);</div><div class="line">        String sql = user.getSql();</div><div class="line">        dbHelper = new DBHelper(sql);</div><div class="line">        dbHelper.preparedStatement.execute();</div><div class="line">        dbHelper.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么UserServiceImpl就只负责做SQL拼装了，具体的数据库操作就交给自己的代理类来完成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class UserServiceImpl implements UserService &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void save(User user) throws Exception &#123;</div><div class="line">        String sql = <span class="string">"insert user(name, sex, age) value ('"</span> + user.getName() + <span class="string">"', '"</span> + user.getSex() + <span class="string">"', "</span> + user.getAge() + <span class="string">")"</span>;</div><div class="line">        user.setSql(sql);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line">        User user = new User(<span class="string">"张三"</span>, <span class="string">"男"</span>, 30);</div><div class="line">        UserService userServiceProxy = new UserServiceImplProxy(new UserServiceImpl());</div><div class="line">        userServiceProxy.save(user);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从以上代码中可看出，静态代理有如下缺点：</p>
+<blockquote>
+<ol>
+<li>编译代码时，就得清楚知道委托类（UserServiceImpl）的具体代理类（UserServiceImplProxy）；</li>
+<li>共同实现一个接口，以及如果业务类多的话，就得编写大量的代理类。</li>
+</ol>
+</blockquote>
+<p>那么，是否有一种在运行时自动生成代理类呢？</p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2>
+      
+    </div>
+  </div>
+  
+</article></section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 pksurecom@163.com<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
