@@ -78,7 +78,7 @@
 <li>CAS：Compare and Swap (比较并交换)</li>
 <li>缓存行：Cache Line ，<a href="#cache-line">详细介绍</a></li>
 </ul>
-<h2 id="什么是原子操作？-What"><a href="#什么是原子操作？-What" class="headerlink" title="什么是原子操作？(What)"></a>什么是原子操作？(What)</h2><p>所谓【原子】也即是不可再分割的最小粒子，那么，原子操作就是不可再拆分的操作。</p>
+<h2 id="什么是原子操作？-What"><a href="#什么是原子操作？-What" class="headerlink" title="什么是原子操作？(What)"></a>什么是原子操作？(What)</h2><p>所谓【原子】也即是不可再分割的最小粒子，那么，原子操作就是不可再拆分或中断的操作。</p>
 <h2 id="为什么要使用原子操作？-Why"><a href="#为什么要使用原子操作？-Why" class="headerlink" title="为什么要使用原子操作？(Why)"></a>为什么要使用原子操作？(Why)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. 保证数据安全；</div><div class="line">2. ；</div><div class="line">3. ；</div></pre></td></tr></table></figure>
 <h2 id="什么场景下使用原子操作？-Where-When"><a href="#什么场景下使用原子操作？-Where-When" class="headerlink" title="什么场景下使用原子操作？(Where-When)"></a>什么场景下使用原子操作？(Where-When)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. ；</div><div class="line">2. ；</div><div class="line">3. ；</div></pre></td></tr></table></figure>
 <h2 id="Java内部是怎么实现原子操作呢？-How"><a href="#Java内部是怎么实现原子操作呢？-How" class="headerlink" title="Java内部是怎么实现原子操作呢？(How)"></a>Java内部是怎么实现原子操作呢？(How)</h2><p>Java的原子操作类都存放在java.util.concurrent.atomic包下（JDK1.8.0_91一共17个类），主要分为3大类：</p>
