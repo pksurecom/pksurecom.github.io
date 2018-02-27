@@ -73,9 +73,22 @@
   <div class="article-page-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是建造者模式？-What"><a href="#什么是建造者模式？-What" class="headerlink" title="什么是建造者模式？(What)"></a>什么是建造者模式？(What)</h2><p>所谓建造者模式，</p>
-<h4 id="UML类图："><a href="#UML类图：" class="headerlink" title="UML类图："></a>UML类图：</h4><h4 id="角色划分："><a href="#角色划分：" class="headerlink" title="角色划分："></a>角色划分：</h4><h2 id="为什么要使用建造者模式？-Why"><a href="#为什么要使用建造者模式？-Why" class="headerlink" title="为什么要使用建造者模式？(Why)"></a>为什么要使用建造者模式？(Why)</h2><h2 id="什么场景下使用建造者模式？-Where-When"><a href="#什么场景下使用建造者模式？-Where-When" class="headerlink" title="什么场景下使用建造者模式？(Where-When)"></a>什么场景下使用建造者模式？(Where-When)</h2><p>我们来看看建造者模式在哪些框架下使用：</p>
-<h2 id="是否满足OOD原则？"><a href="#是否满足OOD原则？" class="headerlink" title="是否满足OOD原则？"></a>是否满足OOD原则？</h2><h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2>
+        <h2 id="什么是建造者模式？-What"><a href="#什么是建造者模式？-What" class="headerlink" title="什么是建造者模式？(What)"></a>什么是建造者模式？(What)</h2><p>所谓建造者模式，就是将一个【复杂对象】的构建和表示进行分离，在同样的构建过程中可以创建不同的表示。</p>
+<h4 id="模式类图："><a href="#模式类图：" class="headerlink" title="模式类图："></a>模式类图：</h4><p><img src="../../image/dp/builder.jpg" alt="模式类图"></p>
+<h4 id="角色划分："><a href="#角色划分：" class="headerlink" title="角色划分："></a>角色划分：</h4><ul>
+<li>产品类(Product)：一般是一个较为复杂的对象，也就是创建对象的过程比较复杂，一般会有比较多的代码量。本模式类图中，产品类是一个具体类，<br>而实际编程中，产品类可以由一个(或多个)抽象类和它的不同实现组成；</li>
+<li>抽象建造者(AbstractBuilder)：使用抽象建造者的目的是为了将建造的过程交给它的子类来完成，便于扩展，一般包含至少两个抽象方法：<br>建造产品 和 返回产品；</li>
+<li>具体建造者(Builder)：实现抽象建造者的抽象方法：建造产品 和 返回产品；</li>
+<li>导演类(Director)：负责调用合适的建造者建造产品，一般不与产品类发生依赖关系。</li>
+<li>客户端(Client)：</li>
+</ul>
+<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><h2 id="为什么要使用建造者模式？-Why"><a href="#为什么要使用建造者模式？-Why" class="headerlink" title="为什么要使用建造者模式？(Why)"></a>为什么要使用建造者模式？(Why)</h2><h2 id="什么场景下使用建造者模式？-Where-When"><a href="#什么场景下使用建造者模式？-Where-When" class="headerlink" title="什么场景下使用建造者模式？(Where-When)"></a>什么场景下使用建造者模式？(Where-When)</h2><p>我们来看看建造者模式在一些框架下的使用：</p>
+<h2 id="与其他模式的比较"><a href="#与其他模式的比较" class="headerlink" title="与其他模式的比较"></a>与其他模式的比较</h2><ul>
+<li>与工厂模式的区别？</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>建造者模式与工厂模式类似，他们都是创建型模式，适用的场景也很相似。一般来说，如果产品的建造很复杂，那么请用工厂模式；如果产品的建造更复杂，那么请用建造者模式。</p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.zhangshengrong.com/p/zAaORbp1db/" target="_blank" rel="external">深入解析Java的设计模式编程中建造者模式的运用</a></p>
+
       
     </div>
   </div>
