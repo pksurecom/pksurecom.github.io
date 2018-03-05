@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>个人全栈之路</title>
+  <title>图解Java内存模型 | 个人全栈之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -57,53 +57,34 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   <div class="article-meta">
     
       <header class="article-header">
         
   
-    <a class="article-title" href="/2018/02/26/hello-world/">首页推荐</a>
+    <a class="article-title" href="/backend/jvm/jvm-memory-model.html">图解Java内存模型</a>
   
 
       </header>
     
-    <time class="article-date" datetime="2018-02-26T05:44:32.242Z" itemprop="datePublished">02-26-2018</time>
     
   </div>
-  <div class="article-inner">
+  <div class="article-page-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JEE系列推荐"><a href="#JEE系列推荐" class="headerlink" title=" JEE系列推荐 "></a><span> JEE系列推荐 </span></h2><blockquote>
-<p><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a><br><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a></p>
-</blockquote>
-<h2 id="数据库系列推荐"><a href="#数据库系列推荐" class="headerlink" title=" 数据库系列推荐 "></a><span> 数据库系列推荐 </span></h2><blockquote>
-<p><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a><br><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a></p>
-</blockquote>
-<h2 id="DevOps系列推荐"><a href="#DevOps系列推荐" class="headerlink" title=" DevOps系列推荐 "></a><span> DevOps系列推荐 </span></h2><blockquote>
-<p><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a><br><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a></p>
-</blockquote>
-<h2 id="读书系列推荐"><a href="#读书系列推荐" class="headerlink" title=" 读书系列推荐 "></a><span> 读书系列推荐 </span></h2><blockquote>
-<p><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a><br><a href="backend/jdk/concurrent-cas">并发编程-CAS(CompareAndSwap)</a></p>
-</blockquote>
+        <h2 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h2><ul>
+<li>OOM 是 OutOfMemoryError 的简称；</li>
+</ul>
+<h2 id="0-总体结构"><a href="#0-总体结构" class="headerlink" title="0. 总体结构"></a>0. 总体结构</h2><h2 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h2><p><img src="../../image/jdk/cas-execute-flow.png" alt="CAS执行流程"></p>
+<h2 id="2-Java虚拟机栈"><a href="#2-Java虚拟机栈" class="headerlink" title="2. Java虚拟机栈"></a>2. Java虚拟机栈</h2><h2 id="3-本地方法栈"><a href="#3-本地方法栈" class="headerlink" title="3. 本地方法栈"></a>3. 本地方法栈</h2><h2 id="4-堆"><a href="#4-堆" class="headerlink" title="4. 堆"></a>4. 堆</h2><p><img src="../../image/jdk/cas-aba.png" alt="ABA问题"></p>
+<h2 id="5-方法区"><a href="#5-方法区" class="headerlink" title="5. 方法区"></a>5. 方法区</h2><h2 id="6-运行时常量池"><a href="#6-运行时常量池" class="headerlink" title="6. 运行时常量池"></a>6. 运行时常量池</h2><h2 id="7-直接内存"><a href="#7-直接内存" class="headerlink" title="7. 直接内存"></a>7. 直接内存</h2><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p><img src="../../image/common/study-method.png" alt="学习方法"><br>遵循以上的学习方法，本篇博文将不断测试迭代（更新修改），使其表达得更准确！</p>
 
       
     </div>
-    <footer class="article-footer">
-      <!--<a data-url="http://yoursite.com/2018/02/26/hello-world/" data-id="cjeefa8v80000s7q2b35teee4" class="article-share-link">Share</a>-->
-      
-      
-    </footer>
   </div>
   
-</article>
-
-
-  
-  
-</section>
+</article></section>
         
       </div>
       <footer id="footer">
